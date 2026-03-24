@@ -1,0 +1,1788 @@
+<!DOCTYPE html>
+<html lang="bs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Koncept Caffe Bar & Restoran Banja Luka — Rezervišite sto online. Jovana Dučića 23a. Doručak, ručak, večera, koktel bar. Besplatan parking.">
+<meta name="keywords" content="restoran banja luka, caffe bar banja luka, rezervacija stola banja luka, doručak banja luka, business lunch banja luka, koncept banja luka">
+<meta property="og:title" content="Koncept — Caffe Bar & Restoran Banja Luka">
+<meta property="og:description" content="Gdje se kafa pretvara u ideje, a hrana u iskustvo. Rezervišite sto odmah.">
+<meta property="og:type" content="restaurant">
+<title>Koncept — Caffe Bar & Restoran | Banja Luka</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --dark: #111111;
+    --card-bg: #161616;
+    --gold: #c9a96e;
+    --gold-light: #e8c99a;
+    --green: #3d5a3e;
+    --green-light: #5a7d5b;
+    --cream: #f5f0e8;
+    --text: #e8e2d8;
+    --muted: #8a8070;
+    --border: rgba(201,169,110,0.15);
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ─── NOISE OVERLAY ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.35;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    padding: 1.5rem 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background 0.4s, padding 0.4s;
+  }
+  nav.scrolled {
+    background: rgba(10,10,10,0.95);
+    backdrop-filter: blur(12px);
+    padding: 1rem 3rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--gold);
+    letter-spacing: 0.12em;
+    text-decoration: none;
+  }
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+    align-items: center;
+  }
+  .nav-links a {
+    color: var(--text);
+    text-decoration: none;
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta {
+    background: var(--gold) !important;
+    color: var(--black) !important;
+    padding: 0.65rem 1.6rem !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.1em !important;
+    transition: background 0.3s, transform 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--gold-light) !important; transform: translateY(-1px); }
+
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px;
+  }
+  .hamburger span {
+    display: block;
+    width: 24px;
+    height: 1.5px;
+    background: var(--gold);
+    transition: 0.3s;
+  }
+
+  /* ─── HERO ─── */
+  #hero {
+    position: relative;
+    height: 100vh;
+    min-height: 700px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      #0a0a0a 0%,
+      #0f1a0f 40%,
+      #1a1200 70%,
+      #0a0a0a 100%
+    );
+  }
+  .hero-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 60% 40%, rgba(201,169,110,0.08) 0%, transparent 70%),
+                radial-gradient(ellipse 50% 70% at 20% 80%, rgba(61,90,62,0.15) 0%, transparent 60%);
+  }
+
+  /* Floating food image in hero */
+  .hero-food-img {
+    position: absolute;
+    right: 8%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 42%;
+    max-width: 580px;
+    border-radius: 2px;
+    opacity: 0;
+    animation: fadeSlideLeft 1.2s ease forwards 0.8s;
+    box-shadow: -40px 40px 80px rgba(0,0,0,0.7);
+  }
+  @keyframes fadeSlideLeft {
+    from { opacity: 0; transform: translateY(-50%) translateX(40px); }
+    to { opacity: 0.85; transform: translateY(-50%) translateX(0); }
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 600px;
+    padding: 0 3rem;
+    margin-right: auto;
+    margin-left: 8%;
+  }
+  .hero-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.2s;
+  }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 7vw, 6rem);
+    font-weight: 300;
+    line-height: 1.0;
+    letter-spacing: -0.01em;
+    color: var(--cream);
+    margin-bottom: 0.3rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.4s;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--gold);
+  }
+  .hero-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    font-weight: 300;
+    color: var(--muted);
+    margin-bottom: 2.5rem;
+    letter-spacing: 0.05em;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.55s;
+  }
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.7s;
+  }
+  .btn-primary {
+    background: var(--gold);
+    color: var(--black);
+    padding: 1rem 2.2rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+    display: inline-block;
+  }
+  .btn-primary:hover {
+    background: var(--gold-light);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(201,169,110,0.3);
+  }
+  .btn-secondary {
+    background: transparent;
+    color: var(--text);
+    padding: 1rem 2.2rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid var(--border);
+    cursor: pointer;
+    transition: border-color 0.3s, color 0.3s, transform 0.2s;
+    display: inline-block;
+  }
+  .btn-secondary:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+    transform: translateY(-2px);
+  }
+
+  .hero-badges {
+    position: absolute;
+    bottom: 3rem;
+    left: 8%;
+    display: flex;
+    gap: 2.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.9s;
+  }
+  .badge {
+    text-align: left;
+  }
+  .badge-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 300;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .badge-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 0.2rem;
+  }
+
+  .scroll-indicator {
+    position: absolute;
+    bottom: 3rem;
+    right: 8%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0;
+    animation: fadeIn 1s ease forwards 1.5s;
+  }
+  .scroll-line {
+    width: 1px;
+    height: 60px;
+    background: linear-gradient(to bottom, transparent, var(--gold));
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+  }
+  .scroll-text {
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--muted);
+    writing-mode: vertical-rl;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  /* ─── ANNOUNCEMENT BAR ─── */
+  .announce {
+    background: var(--green);
+    padding: 0.7rem 2rem;
+    text-align: center;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    color: var(--cream);
+  }
+  .announce a { color: var(--gold-light); text-decoration: none; }
+
+  /* ─── SECTIONS ─── */
+  section { padding: 7rem 3rem; }
+  .section-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    display: block;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--cream);
+    margin-bottom: 1.5rem;
+  }
+  .section-title em { font-style: italic; color: var(--gold); }
+
+  /* ─── ABOUT / SPACE ─── */
+  #about {
+    background: var(--dark);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+    padding: 7rem 8%;
+  }
+  .about-images {
+    position: relative;
+    height: 600px;
+  }
+  .about-img-main {
+    position: absolute;
+    top: 0; left: 0;
+    width: 75%;
+    height: 80%;
+    object-fit: cover;
+    filter: brightness(0.85);
+  }
+  .about-img-secondary {
+    position: absolute;
+    bottom: 0; right: 0;
+    width: 55%;
+    height: 55%;
+    object-fit: cover;
+    border: 4px solid var(--dark);
+    filter: brightness(0.85);
+  }
+  .gold-accent-line {
+    position: absolute;
+    top: -20px; left: -20px;
+    width: 80px;
+    height: 80px;
+    border-top: 2px solid var(--gold);
+    border-left: 2px solid var(--gold);
+  }
+  .about-text p {
+    color: var(--muted);
+    line-height: 1.9;
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+  }
+  .about-features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+  }
+  .feature {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+  }
+  .feature-icon {
+    color: var(--gold);
+    font-size: 1.1rem;
+    margin-top: 0.1rem;
+    flex-shrink: 0;
+  }
+  .feature-text {
+    font-size: 0.82rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--text);
+    line-height: 1.5;
+  }
+
+  /* ─── MENU ─── */
+  #menu {
+    background: var(--black);
+    padding: 7rem 8%;
+  }
+  .menu-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 3.5rem;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .menu-tabs {
+    display: flex;
+    gap: 0;
+    border: 1px solid var(--border);
+    overflow: hidden;
+  }
+  .tab-btn {
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.75rem 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    border-right: 1px solid var(--border);
+  }
+  .tab-btn:last-child { border-right: none; }
+  .tab-btn.active, .tab-btn:hover {
+    background: var(--gold);
+    color: var(--black);
+  }
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5px;
+    background: var(--border);
+  }
+  .menu-panel { display: none; }
+  .menu-panel.active { display: block; }
+  .menu-item {
+    background: var(--card-bg);
+    overflow: hidden;
+    position: relative;
+    group: true;
+    cursor: pointer;
+  }
+  .menu-item-img {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.8) saturate(0.9);
+    transition: filter 0.5s, transform 0.5s;
+  }
+  .menu-item:hover .menu-item-img {
+    filter: brightness(1) saturate(1.1);
+    transform: scale(1.04);
+  }
+  .menu-item-info {
+    padding: 1.3rem 1.5rem;
+  }
+  .menu-item-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: var(--cream);
+    margin-bottom: 0.3rem;
+  }
+  .menu-item-desc {
+    font-size: 0.78rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .menu-full-link {
+    display: block;
+    text-align: center;
+    margin-top: 2.5rem;
+    color: var(--gold);
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding-bottom: 2px;
+    border-bottom: 1px solid var(--border);
+    display: inline-block;
+    transition: border-color 0.3s;
+  }
+  .menu-full-link:hover { border-color: var(--gold); }
+  .menu-full-wrap { text-align: center; margin-top: 3rem; }
+
+  /* ─── RESERVATION ─── */
+  #rezervacija {
+    background: linear-gradient(135deg, #0f1a0f 0%, #111 50%, #1a1200 100%);
+    padding: 7rem 8%;
+    position: relative;
+    overflow: hidden;
+  }
+  #rezervacija::before {
+    content: 'REZERVACIJA';
+    position: absolute;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(6rem, 14vw, 14rem);
+    font-weight: 300;
+    color: rgba(201,169,110,0.04);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+    pointer-events: none;
+    letter-spacing: 0.1em;
+  }
+  .rez-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 720px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .rez-inner .section-title { margin-bottom: 0.5rem; }
+  .rez-subtitle {
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin-bottom: 3rem;
+    line-height: 1.8;
+  }
+
+  /* Quick action buttons */
+  .rez-quick {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+  }
+  .rez-quick-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 1.1rem 2rem;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    color: var(--text);
+    text-decoration: none;
+    font-size: 0.82rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: all 0.3s;
+  }
+  .rez-quick-btn:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+    transform: translateY(-2px);
+  }
+  .rez-quick-btn .icon { font-size: 1.1rem; }
+  .rez-quick-btn.primary-btn {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: var(--black);
+    font-weight: 500;
+  }
+  .rez-quick-btn.primary-btn:hover {
+    background: var(--gold-light);
+    color: var(--black);
+  }
+
+  .rez-divider {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+  .rez-divider::before, .rez-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+  .rez-divider span {
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* Form */
+  .rez-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    text-align: left;
+  }
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .form-group.full { grid-column: 1 / -1; }
+  .form-group label {
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 0.9rem 1.1rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem;
+    outline: none;
+    transition: border-color 0.3s;
+    -webkit-appearance: none;
+  }
+  .form-group select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23c9a96e' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-color: rgba(255,255,255,0.04);
+  }
+  .form-group select option { background: var(--dark); }
+  .form-group textarea { height: 90px; resize: none; }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus { border-color: var(--gold); }
+  .form-submit {
+    grid-column: 1 / -1;
+    background: var(--gold);
+    border: none;
+    color: var(--black);
+    padding: 1.1rem 2rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    margin-top: 0.5rem;
+  }
+  .form-submit:hover {
+    background: var(--gold-light);
+    transform: translateY(-1px);
+  }
+
+  /* ─── GALLERY ─── */
+  #galerija {
+    background: var(--dark);
+    padding: 7rem 8%;
+  }
+  .gallery-masonry {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto;
+    gap: 4px;
+    margin-top: 3rem;
+  }
+  .gallery-item {
+    overflow: hidden;
+    position: relative;
+  }
+  .gallery-item:nth-child(1) { grid-column: 1 / 3; grid-row: 1 / 3; }
+  .gallery-item:nth-child(6) { grid-column: 3 / 5; }
+  .gallery-item img {
+    width: 100%;
+    height: 100%;
+    min-height: 200px;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.85) saturate(0.8);
+    transition: filter 0.5s, transform 0.5s;
+  }
+  .gallery-item:hover img {
+    filter: brightness(1) saturate(1);
+    transform: scale(1.03);
+  }
+  .gallery-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(201,169,110,0);
+    transition: background 0.4s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .gallery-item:hover .gallery-overlay { background: rgba(201,169,110,0.1); }
+
+  /* ─── REVIEWS ─── */
+  #utisci {
+    background: var(--black);
+    padding: 7rem 8%;
+  }
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    margin-top: 3rem;
+  }
+  .review-card {
+    background: var(--card-bg);
+    padding: 2.5rem;
+  }
+  .stars {
+    color: var(--gold);
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    margin-bottom: 1.2rem;
+  }
+  .review-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    font-style: italic;
+    color: var(--text);
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+  }
+  .review-author {
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .google-badge {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem 2.5rem;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    margin-top: 2.5rem;
+    max-width: 360px;
+  }
+  .google-badge-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    font-weight: 300;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .google-badge-info .stars { margin-bottom: 0.2rem; }
+  .google-badge-info span {
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ─── INFO / LOCATION ─── */
+  #posjeti {
+    background: var(--dark);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    padding: 0;
+    min-height: 500px;
+  }
+  .info-panel {
+    padding: 7rem 8%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .info-items {
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  .info-item {
+    display: flex;
+    gap: 1.2rem;
+    align-items: flex-start;
+  }
+  .info-item-icon {
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gold);
+    font-size: 0.9rem;
+    flex-shrink: 0;
+  }
+  .info-item-content h4 {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.4rem;
+  }
+  .info-item-content p, .info-item-content a {
+    font-size: 0.95rem;
+    color: var(--text);
+    text-decoration: none;
+    line-height: 1.6;
+    transition: color 0.3s;
+  }
+  .info-item-content a:hover { color: var(--gold); }
+  .map-panel {
+    position: relative;
+    background: #0d1a0d;
+    min-height: 500px;
+  }
+  .map-panel iframe {
+    width: 100%;
+    height: 100%;
+    min-height: 500px;
+    border: none;
+    filter: grayscale(100%) invert(92%) contrast(83%) hue-rotate(180deg) saturate(0.3) brightness(0.75);
+    opacity: 0.85;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--black);
+    border-top: 1px solid var(--border);
+    padding: 3.5rem 8%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: var(--gold);
+    letter-spacing: 0.12em;
+  }
+  .footer-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+  .footer-links a {
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .footer-links a:hover { color: var(--gold); }
+  .footer-social {
+    display: flex;
+    gap: 1rem;
+  }
+  .social-btn {
+    width: 38px;
+    height: 38px;
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: all 0.3s;
+  }
+  .social-btn:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+  .footer-copy {
+    width: 100%;
+    text-align: center;
+    font-size: 0.7rem;
+    color: rgba(138,128,112,0.4);
+    letter-spacing: 0.1em;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(201,169,110,0.06);
+    margin-top: 1rem;
+  }
+
+  /* ─── MODAL ─── */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.8);
+    backdrop-filter: blur(8px);
+    z-index: 9000;
+    align-items: center;
+    justify-content: center;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal-box {
+    background: var(--dark);
+    border: 1px solid var(--border);
+    padding: 3rem;
+    max-width: 560px;
+    width: 90%;
+    position: relative;
+    animation: fadeUp 0.4s ease;
+  }
+  .modal-close {
+    position: absolute;
+    top: 1.2rem; right: 1.5rem;
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-size: 1.3rem;
+    cursor: pointer;
+    transition: color 0.3s;
+    line-height: 1;
+  }
+  .modal-close:hover { color: var(--gold); }
+  .modal-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 300;
+    color: var(--cream);
+    margin-bottom: 0.5rem;
+  }
+  .modal-subtitle {
+    font-size: 0.8rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    margin-bottom: 2rem;
+  }
+  .modal-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-bottom: 2rem;
+  }
+  .modal-option {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.1rem 1.5rem;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    color: var(--text);
+    text-decoration: none;
+    font-size: 0.88rem;
+    letter-spacing: 0.05em;
+    transition: all 0.3s;
+  }
+  .modal-option:hover {
+    border-color: var(--gold);
+    background: rgba(201,169,110,0.05);
+    color: var(--gold);
+  }
+  .modal-option .opt-icon {
+    font-size: 1.3rem;
+    width: 30px;
+    text-align: center;
+  }
+  .modal-option .opt-label { font-weight: 400; }
+  .modal-option .opt-sub {
+    font-size: 0.72rem;
+    color: var(--muted);
+    display: block;
+    margin-top: 0.1rem;
+    letter-spacing: 0.05em;
+  }
+  .modal-form { display: flex; flex-direction: column; gap: 0.8rem; }
+  .modal-form input, .modal-form select, .modal-form textarea {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 0.85rem 1rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem;
+    outline: none;
+    width: 100%;
+    transition: border-color 0.3s;
+    -webkit-appearance: none;
+  }
+  .modal-form select option { background: var(--dark); }
+  .modal-form input:focus, .modal-form select:focus { border-color: var(--gold); }
+  .modal-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+  .modal-submit {
+    background: var(--gold);
+    border: none;
+    color: var(--black);
+    padding: 1rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    width: 100%;
+    transition: background 0.3s;
+    margin-top: 0.5rem;
+  }
+  .modal-submit:hover { background: var(--gold-light); }
+
+  /* ─── FLOATING CTA ─── */
+  .floating-cta {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 500;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    align-items: flex-end;
+  }
+  .float-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.75rem 1.2rem;
+    text-decoration: none;
+    font-size: 0.78rem;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    border-radius: 0;
+    transition: transform 0.2s, box-shadow 0.3s;
+    white-space: nowrap;
+  }
+  .float-btn:hover { transform: translateX(-3px); }
+  .float-btn.call {
+    background: var(--green);
+    color: white;
+    box-shadow: 0 4px 15px rgba(61,90,62,0.4);
+  }
+  .float-btn.insta {
+    background: linear-gradient(135deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
+    color: white;
+    box-shadow: 0 4px 15px rgba(200,50,100,0.3);
+  }
+  .float-btn.rez {
+    background: var(--gold);
+    color: var(--black);
+    box-shadow: 0 4px 20px rgba(201,169,110,0.4);
+  }
+
+  /* ─── SUCCESS MESSAGE ─── */
+  .success-msg {
+    display: none;
+    text-align: center;
+    padding: 2rem;
+  }
+  .success-msg.show { display: block; }
+  .success-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+  .success-msg h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+  .success-msg p {
+    font-size: 0.88rem;
+    color: var(--muted);
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 1024px) {
+    #about { grid-template-columns: 1fr; gap: 4rem; padding: 5rem 5%; }
+    .about-images { height: 400px; }
+    .menu-grid { grid-template-columns: repeat(2, 1fr); }
+    .reviews-grid { grid-template-columns: 1fr 1fr; }
+    #posjeti { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 1.2rem 1.5rem; }
+    nav.scrolled { padding: 0.8rem 1.5rem; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .nav-links.open {
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: rgba(10,10,10,0.98);
+      padding: 5rem 2rem 3rem;
+      gap: 1.5rem;
+      z-index: 999;
+    }
+    .hero-food-img { display: none; }
+    .hero-content { margin-left: 0; padding: 0 1.5rem; }
+    .hero-badges { left: 1.5rem; gap: 1.5rem; }
+    section { padding: 5rem 1.5rem; }
+    #about { padding: 5rem 1.5rem; }
+    #menu { padding: 5rem 1.5rem; }
+    #rezervacija { padding: 5rem 1.5rem; }
+    #galerija { padding: 5rem 1.5rem; }
+    #utisci { padding: 5rem 1.5rem; }
+    .info-panel { padding: 5rem 1.5rem; }
+    footer { padding: 3rem 1.5rem; }
+    .menu-tabs { flex-wrap: wrap; }
+    .menu-grid { grid-template-columns: 1fr; }
+    .reviews-grid { grid-template-columns: 1fr; }
+    .rez-form { grid-template-columns: 1fr; }
+    .gallery-masonry { grid-template-columns: repeat(2, 1fr); }
+    .gallery-item:nth-child(1) { grid-column: 1; grid-row: 1; }
+    .gallery-item:nth-child(6) { grid-column: 1; }
+    .about-images { height: 300px; }
+    footer { flex-direction: column; text-align: center; }
+    .footer-links { justify-content: center; flex-wrap: wrap; gap: 1rem; }
+    .footer-social { justify-content: center; }
+    .modal-form-row { grid-template-columns: 1fr; }
+    .floating-cta { bottom: 1rem; right: 1rem; }
+    .rez-quick { flex-direction: column; align-items: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">KONCEPT</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about">Prostor</a></li>
+    <li><a href="#menu">Jelovnik</a></li>
+    <li><a href="#utisci">Utisci</a></li>
+    <li><a href="#posjeti">Lokacija</a></li>
+    <li><a href="#rezervacija" class="nav-cta" onclick="openModal()">Rezerviši</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- ANNOUNCEMENT -->
+<div class="announce">
+  Radno vrijeme: Pon–Ned, 07:00–01:00 &nbsp;|&nbsp;
+  <a href="tel:+38766000000">Pozovite za rezervaciju</a> &nbsp;|&nbsp;
+  Besplatan parking
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <img 
+    src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=900&q=80&auto=format&fit=crop" 
+    alt="Koncept hrana" 
+    class="hero-food-img"
+    onerror="this.style.display='none'"
+  >
+  <div class="hero-content">
+    <span class="hero-label">Caffe Bar & Restoran · Banja Luka</span>
+    <h1 class="hero-title">Gdje ideje<br><em>dobijaju ukus.</em></h1>
+    <p class="hero-subtitle">Jovana Dučića 23a · Od 07:00 do 01:00</p>
+    <div class="hero-actions">
+      <a href="#" class="btn-primary" onclick="openModal(); return false;">Rezerviši sto</a>
+      <a href="#menu" class="btn-secondary">Pogledaj jelovnik</a>
+    </div>
+  </div>
+  <div class="hero-badges">
+    <div class="badge">
+      <div class="badge-num">4.5★</div>
+      <div class="badge-label">Google recenzije</div>
+    </div>
+    <div class="badge">
+      <div class="badge-num">200+</div>
+      <div class="badge-label">Mjesta za sjedenje</div>
+    </div>
+    <div class="badge">
+      <div class="badge-num">07–01</div>
+      <div class="badge-label">Radno vrijeme</div>
+    </div>
+  </div>
+  <div class="scroll-indicator">
+    <div class="scroll-line"></div>
+    <div class="scroll-text">Scroll</div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-images">
+    <div class="gold-accent-line"></div>
+    <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=700&q=80&auto=format&fit=crop" alt="Koncept interijer" class="about-img-main" onerror="this.style.background:'#161616'">
+    <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=500&q=80&auto=format&fit=crop" alt="Koncept terasa" class="about-img-secondary" onerror="this.style.background:'#111'">
+  </div>
+  <div class="about-text">
+    <span class="section-label">Ko smo mi</span>
+    <h2 class="section-title">Više od <em>mjesta</em><br>za jelo</h2>
+    <p>Koncept nije samo restoran — to je iskustvo. Moderan prostor koji spaja ugodnost kafića sa punoćom restorana, savršen za jutarnju kafu, poslovni ručak ili večernji koktel.</p>
+    <p>Naša kuhinja priprema svježa jela od lokalnih namirnica. Naš bar nudi pažljivo odabranu kolekciju pića. Naš tim brine da svaki trenutak bude zapamćen.</p>
+    <div class="about-features">
+      <div class="feature">
+        <span class="feature-icon">✦</span>
+        <span class="feature-text">Besplatan parking</span>
+      </div>
+      <div class="feature">
+        <span class="feature-icon">✦</span>
+        <span class="feature-text">WiFi za goste</span>
+      </div>
+      <div class="feature">
+        <span class="feature-icon">✦</span>
+        <span class="feature-text">Prostrana terasa</span>
+      </div>
+      <div class="feature">
+        <span class="feature-icon">✦</span>
+        <span class="feature-text">Poslovni ručkovi</span>
+      </div>
+      <div class="feature">
+        <span class="feature-icon">✦</span>
+        <span class="feature-text">Takeaway dostupno</span>
+      </div>
+      <div class="feature">
+        <span class="feature-icon">✦</span>
+        <span class="feature-text">Privatne proslave</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section id="menu">
+  <div class="menu-header">
+    <div>
+      <span class="section-label">Jelovnik</span>
+      <h2 class="section-title">Svježe. Domaće.<br><em>Nezaboravno.</em></h2>
+    </div>
+    <div class="menu-tabs">
+      <button class="tab-btn active" onclick="switchTab('dorucak', this)">Doručak</button>
+      <button class="tab-btn" onclick="switchTab('rucak', this)">Ručak & Večera</button>
+      <button class="tab-btn" onclick="switchTab('slatko', this)">Slatkiši</button>
+      <button class="tab-btn" onclick="switchTab('pizza', this)">Pizza</button>
+    </div>
+  </div>
+
+  <!-- DORUCAK -->
+  <div class="menu-panel active" id="panel-dorucak">
+    <div class="menu-grid">
+      <div class="menu-item">
+        <img src="/mnt/user-data/uploads/dorucak.jpg" alt="Doručak" class="menu-item-img" onerror="this.src='https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?w=400&q=80'">
+        <div class="menu-item-info">
+          <div class="menu-item-name">Koncept Doručak</div>
+          <div class="menu-item-desc">Jaja, kobasica, sir, paradajz, urnebes, maslo</div>
+        </div>
+      </div>
+      <div class="menu-item">
+        <img src="/mnt/user-data/uploads/32.jpg" alt="Doručak 2" class="menu-item-img" onerror="this.src='https://images.unsplash.com/photo-1484723091739-30a097e8f929?w=400&q=80'">
+        <div class="menu-item-info">
+          <div class="menu-item-name">Veliki Doručak</div>
+          <div class="menu-item-desc">Sa pljeskavicama, jajima, sirom i svježim povrćem</div>
+        </div>
+      </div>
+      <div class="menu-item">
+        <img src="/mnt/user-data/uploads/koncept_hrana-1.jpg" alt="Hrana" class="menu-item-img" onerror="this.src='https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&q=80'">
+        <div class="menu-item-info">
+          <div class="menu-item-name">Sendvič</div>
+          <div class="menu-item-desc">Hrskavi sendvič sa šunkom, sirom i prženim krumpirom</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RUCAK -->
+  <div class="menu-panel" id="panel-rucak">
+    <div class="menu-grid">
+      <div class="menu-item">
+        <img src="/mnt/user-data/uploads/meso.jpg" alt="Biftek" class="menu-item-img" onerror="this.src='https://images.unsplash.com/photo-1544025162-d76694265947?w=400&q=80'">
+        <div class="menu-item-info">
+          <div class="menu-item-name">Biftek u umaku</div>
+          <div class="menu-item-desc">Sa miješanim povrćem i kremastim krumpirom</div>
+        </div>
+      </div>
+      <div class="menu-item">
+        <img src="/mnt/user-data/uploads/burger.jpg" alt="Burger" class="menu-item-img" onerror="this.src='https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&q=80'">
+        <div class="menu-item-info">
+          <div class="menu-item-name">Koncept Burger</div>
+          <div class="menu-item-desc">Domaći burger sa topljenim sirom, slaninom i prženim krumpirom</div>
+        </div>
+      </div>
+      <div class="menu-item">
+        <img src="/mnt/user-data/uploads/neki_kurac.jpg" alt="Ražnjić" class="menu-item-img" onerror="this.src='https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400&q=80'">
+        <div class="menu-item-info">
+          <div class="menu-item-name">Mješano sa roštilja</div>
+          <div class="menu-item-desc">Ražnjić sa mješanim mesom, povrćem i krumpirom</div>
+        </div>
+      </div>
+      <div class="menu-item">
+        <img src="/mnt/user-data/uploads/mesa.jpg" alt="Piletina" class="menu-item-img" onerror="this.src='https://images.unsplash.com/photo-1518492104633-130d0cc84637?w=400&q=80'">
+        <div class="menu-item-info">
+          <div class="menu-item-name">Piletina u curry umaku</div>
+          <div class="menu-item-desc">Sa začinjenim krumpirom wedges</div>
+        </div>
+      </div>
+      <div class="menu-item">
+        <img src="/mnt/user-data/uploads/idk.jpg" alt="Salata" class="menu-item-img" onerror="this.src='https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&q=80'">
+        <div class="menu-item-info">
+          <div class="menu-item-name">Cezar salata</div>
+          <div class="menu-item-desc">Sa hrskavom piletinom, parmezanom i sušenim paradajzom</div>
+        </div>
+      </div>
+      <div class="menu-item">
+        <img src="/mnt/user-data/uploads/tortilja.jpg" alt="Tortilja" class="menu-item-img" onerror="this.src='https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=400&q=80'">
+        <div class="menu-item-info">
+          <div class="menu-item-name">Tortilja wrap</div>
+          <div class="menu-item-desc">Sa mesom, povrćem i chilli sosom</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLATKO -->
+  <div class="menu-panel" id="panel-slatko">
+    <div class="menu-grid">
+      <div class="menu-item">
+        <img src="/mnt/user-data/uploads/mala.jpg" alt="Palačinka" class="menu-item-img" onerror="this.src='https://images.unsplash.com/photo-1519676867240-f03562e64548?w=400&q=80'">
+        <div class="menu-item-info">
+          <div class="menu-item-name">Palačinka Ferrero</div>
+          <div class="menu-item-desc">Sa čokoladnim umakom, lješnjacima i šlagom</div>
+        </div>
+      </div>
+      <div class="menu-item">
+        <img src="/mnt/user-data/uploads/slatkis.jpg" alt="Vafla" class="menu-item-img" onerror="this.src='https://images.unsplash.com/photo-1562376552-0d160a2f238d?w=400&q=80'">
+        <div class="menu-item-info">
+          <div class="menu-item-name">Belgijska vafla</div>
+          <div class="menu-item-desc">Sa sladoledom, čokoladom i šarenim bombonima</div>
+        </div>
+      </div>
+      <div class="menu-item">
+        <img src="/mnt/user-data/uploads/OPRICI.jpg" alt="Oreo palačinka" class="menu-item-img" onerror="this.src='https://images.unsplash.com/photo-1519676867240-f03562e64548?w=400&q=80'">
+        <div class="menu-item-info">
+          <div class="menu-item-name">Oreo palačinka</div>
+          <div class="menu-item-desc">Sa bijelom čokoladom, oreo keksima i šlagom</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PIZZA -->
+  <div class="menu-panel" id="panel-pizza">
+    <div class="menu-grid">
+      <div class="menu-item">
+        <img src="/mnt/user-data/uploads/pica.jpg" alt="Pizza" class="menu-item-img" onerror="this.src='https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&q=80'">
+        <div class="menu-item-info">
+          <div class="menu-item-name">Capricciosa</div>
+          <div class="menu-item-desc">Sa šunkom, šampinjonima i mozzarellom</div>
+        </div>
+      </div>
+      <div class="menu-item">
+        <img src="/mnt/user-data/uploads/pica_2.jpg" alt="Pizza 2" class="menu-item-img" onerror="this.src='https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400&q=80'">
+        <div class="menu-item-info">
+          <div class="menu-item-name">Tonno</div>
+          <div class="menu-item-desc">Sa tunom, maslinama, paprikom i kukuruzom</div>
+        </div>
+      </div>
+      <div class="menu-item">
+        <img src="/mnt/user-data/uploads/kul.jpg" alt="Pizza 3" class="menu-item-img" onerror="this.src='https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=400&q=80'">
+        <div class="menu-item-info">
+          <div class="menu-item-name">Quesadilla pizza</div>
+          <div class="menu-item-desc">Hrskava, sa paradajz sosom, sirom i krumpirom</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="menu-full-wrap">
+    <a href="https://www.instagram.com/koncept_bl/" target="_blank" class="menu-full-link">
+      Pogledaj kompletan jelovnik na Instagramu →
+    </a>
+  </div>
+</section>
+
+<!-- RESERVATION SECTION -->
+<section id="rezervacija">
+  <div class="rez-inner">
+    <span class="section-label">Rezervacija</span>
+    <h2 class="section-title">Zauzmi <em>svoj sto</em><br>za minutu</h2>
+    <p class="rez-subtitle">
+      Ne čekaj da te nema mjesta. Rezervišite odmah — online, 
+      telefonom ili putem Instagrama. Besplatan parking vas čeka.
+    </p>
+
+    <div class="rez-quick">
+      <a href="tel:+38766000000" class="rez-quick-btn">
+        <span class="icon">📞</span>
+        Pozovite nas
+      </a>
+      <a href="https://ig.me/m/koncept_bl" target="_blank" class="rez-quick-btn">
+        <span class="icon">📸</span>
+        Instagram DM
+      </a>
+      <a href="#" class="rez-quick-btn primary-btn" onclick="openModal(); return false;">
+        <span class="icon">✦</span>
+        Rezerviši online
+      </a>
+    </div>
+
+    <div class="rez-divider">
+      <span>ili popunite formu</span>
+    </div>
+
+    <form class="rez-form" onsubmit="submitForm(event)">
+      <div class="form-group">
+        <label>Ime i prezime</label>
+        <input type="text" placeholder="Vaše ime" required>
+      </div>
+      <div class="form-group">
+        <label>Telefon</label>
+        <input type="tel" placeholder="+387 6x xxx xxx" required>
+      </div>
+      <div class="form-group">
+        <label>Datum</label>
+        <input type="date" required>
+      </div>
+      <div class="form-group">
+        <label>Vrijeme</label>
+        <input type="time" min="07:00" max="23:30" required>
+      </div>
+      <div class="form-group">
+        <label>Broj osoba</label>
+        <select required>
+          <option value="" disabled selected>Odaberite</option>
+          <option>1–2 osobe</option>
+          <option>3–4 osobe</option>
+          <option>5–6 osoba</option>
+          <option>7–10 osoba</option>
+          <option>10+ osoba</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Zona</label>
+        <select>
+          <option value="" disabled selected>Odaberite zonu</option>
+          <option>Unutrašnjost</option>
+          <option>Terasa</option>
+          <option>Bar zona</option>
+          <option>Bez preferencija</option>
+        </select>
+      </div>
+      <div class="form-group full">
+        <label>Napomena (opciono)</label>
+        <textarea placeholder="Posebne napomene, alergije, prilike..."></textarea>
+      </div>
+      <button type="submit" class="form-submit">Pošalji rezervaciju</button>
+    </form>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="galerija">
+  <span class="section-label">Galerija</span>
+  <h2 class="section-title">Prostor koji <em>inspiriše</em></h2>
+  <div class="gallery-masonry">
+    <div class="gallery-item">
+      <img src="/mnt/user-data/uploads/vani.jpg" alt="Koncept eksterijer" onerror="this.src='https://images.unsplash.com/photo-1514190051997-0f6f39ca5cde?w=700&q=80'">
+      <div class="gallery-overlay"></div>
+    </div>
+    <div class="gallery-item">
+      <img src="/mnt/user-data/uploads/bar.jpg" alt="Koncept bar" onerror="this.src='https://images.unsplash.com/photo-1470337458703-46ad1756a187?w=400&q=80'">
+      <div class="gallery-overlay"></div>
+    </div>
+    <div class="gallery-item">
+      <img src="/mnt/user-data/uploads/meza.jpg" alt="Meza" onerror="this.src='https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=400&q=80'">
+      <div class="gallery-overlay"></div>
+    </div>
+    <div class="gallery-item">
+      <img src="/mnt/user-data/uploads/unutra.jpg" alt="Koncept unutra" onerror="this.src='https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=400&q=80'">
+      <div class="gallery-overlay"></div>
+    </div>
+    <div class="gallery-item">
+      <img src="/mnt/user-data/uploads/vani2.jpg" alt="Terasa" onerror="this.src='https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=400&q=80'">
+      <div class="gallery-overlay"></div>
+    </div>
+    <div class="gallery-item">
+      <img src="/mnt/user-data/uploads/ispred.jpg" alt="Ispred" onerror="this.src='https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?w=700&q=80'">
+      <div class="gallery-overlay"></div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="utisci">
+  <div style="display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:2rem; margin-bottom:3rem;">
+    <div>
+      <span class="section-label">Utisci</span>
+      <h2 class="section-title">Šta kažu <em>gosti</em></h2>
+    </div>
+    <div class="google-badge">
+      <div class="google-badge-num">4.5</div>
+      <div class="google-badge-info">
+        <div class="stars">★★★★½</div>
+        <span>Google recenzije</span>
+      </div>
+    </div>
+  </div>
+  <div class="reviews-grid">
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">"Odlično iskustvo od prvog trenutka. Hrana je bila svježa i ukusna, a osoblje izuzetno ljubazno. Definitivno ću se vratiti!"</p>
+      <div class="review-author">Marija K. · Google</div>
+    </div>
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">"Najljepša terasa u Banja Luci. Bila sam na poslovnom ručku i sve je bilo na najvišem nivou. Preporučujem svima."</p>
+      <div class="review-author">Stefan P. · Google</div>
+    </div>
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">"Bar sa ogromnom selekcijom pića, a kuhinja nikad ne razočara. Palačinke su apsolutni hit — obavezno probajte!"</p>
+      <div class="review-author">Ana M. · Google</div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCATION -->
+<section id="posjeti" style="padding:0;">
+  <div class="info-panel">
+    <span class="section-label">Pronađi nas</span>
+    <h2 class="section-title">Uvijek smo <em>tu</em><br>za tebe</h2>
+    <div class="info-items">
+      <div class="info-item">
+        <div class="info-item-icon">📍</div>
+        <div class="info-item-content">
+          <h4>Adresa</h4>
+          <a href="https://maps.google.com/?q=Jovana+Ducica+23a+Banja+Luka" target="_blank">Jovana Dučića 23a<br>78000 Banja Luka</a>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="info-item-icon">🕐</div>
+        <div class="info-item-content">
+          <h4>Radno vrijeme</h4>
+          <p>Svaki dan: 07:00 – 01:00</p>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="info-item-icon">📞</div>
+        <div class="info-item-content">
+          <h4>Telefon</h4>
+          <a href="tel:+38766000000">+387 66 000 000</a>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="info-item-icon">📸</div>
+        <div class="info-item-content">
+          <h4>Instagram</h4>
+          <a href="https://instagram.com/koncept_bl" target="_blank">@koncept_bl</a>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="info-item-icon">🚗</div>
+        <div class="info-item-content">
+          <h4>Parking</h4>
+          <p>Besplatan parking ispred objekta</p>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:2.5rem;">
+      <a href="#" class="btn-primary" onclick="openModal(); return false;">Rezerviši sto odmah</a>
+    </div>
+  </div>
+  <div class="map-panel">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2842.5!2d17.1920!3d44.7740!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x475e035dc23b29d9%3A0x0!2sJovana+Du%C4%8Di%C4%87a+23a%2C+Banja+Luka!5e0!3m2!1sen!2sba!4v1234567890"
+      allowfullscreen=""
+      loading="lazy"
+      title="Koncept lokacija"
+    ></iframe>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">KONCEPT</div>
+  <ul class="footer-links">
+    <li><a href="#about">Prostor</a></li>
+    <li><a href="#menu">Jelovnik</a></li>
+    <li><a href="#rezervacija">Rezervacija</a></li>
+    <li><a href="#posjeti">Lokacija</a></li>
+  </ul>
+  <div class="footer-social">
+    <a href="https://instagram.com/koncept_bl" target="_blank" class="social-btn" title="Instagram">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+    </a>
+    <a href="tel:+38766000000" class="social-btn" title="Telefon">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+    </a>
+  </div>
+  <div class="footer-copy">
+    © 2025 Koncept Caffe Bar & Restoran · Jovana Dučića 23a, Banja Luka · Sva prava zadržana
+  </div>
+</footer>
+
+<!-- RESERVATION MODAL -->
+<div class="modal-overlay" id="rezModal" onclick="handleOverlayClick(event)">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div id="modalContent">
+      <div class="modal-title">Rezervišite sto</div>
+      <div class="modal-subtitle">Odaberite način rezervacije</div>
+      <div class="modal-options">
+        <a href="tel:+38766000000" class="modal-option">
+          <span class="opt-icon">📞</span>
+          <div>
+            <span class="opt-label">Pozovite nas direktno</span>
+            <span class="opt-sub">+387 66 000 000 · Brzo i jednostavno</span>
+          </div>
+        </a>
+        <a href="https://ig.me/m/koncept_bl" target="_blank" class="modal-option">
+          <span class="opt-icon">📸</span>
+          <div>
+            <span class="opt-label">Instagram poruka</span>
+            <span class="opt-sub">@koncept_bl · Odgovaramo odmah</span>
+          </div>
+        </a>
+        <a href="#" onclick="showForm(); return false;" class="modal-option">
+          <span class="opt-icon">✦</span>
+          <div>
+            <span class="opt-label">Online forma</span>
+            <span class="opt-sub">Popunite formu · Potvrdite rezervaciju</span>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div id="modalForm" style="display:none;">
+      <div class="modal-title">Online rezervacija</div>
+      <div class="modal-subtitle">Popunite podatke · Javimo se u roku od sat vremena</div>
+      <form class="modal-form" onsubmit="submitModalForm(event)">
+        <input type="text" placeholder="Ime i prezime *" required>
+        <input type="tel" placeholder="Telefon * (+387 6x xxx xxx)" required>
+        <div class="modal-form-row">
+          <input type="date" required>
+          <input type="time" min="07:00" max="23:30" required>
+        </div>
+        <select required>
+          <option value="" disabled selected>Broj osoba *</option>
+          <option>1–2 osobe</option>
+          <option>3–4 osobe</option>
+          <option>5–6 osoba</option>
+          <option>7–10 osoba</option>
+          <option>10+ osoba</option>
+        </select>
+        <select>
+          <option value="" disabled selected>Zona (opciono)</option>
+          <option>Unutrašnjost</option>
+          <option>Terasa</option>
+          <option>Bar zona</option>
+          <option>Bez preferencija</option>
+        </select>
+        <button type="submit" class="modal-submit">Pošalji zahtjev za rezervaciju</button>
+      </form>
+      <div style="margin-top:1rem; text-align:center;">
+        <a href="#" onclick="showOptions(); return false;" style="font-size:0.75rem; color:var(--muted); letter-spacing:0.1em; text-transform:uppercase;">← Nazad</a>
+      </div>
+    </div>
+    <div class="success-msg" id="successMsg">
+      <div class="success-icon">✦</div>
+      <h3>Zahtjev primljen!</h3>
+      <p>Javimo vam se telefonom u roku od sat vremena za potvrdu rezervacije.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FLOATING CTA -->
+<div class="floating-cta">
+  <a href="tel:+38766000000" class="float-btn call">
+    📞 Pozovi
+  </a>
+  <a href="https://instagram.com/koncept_bl" target="_blank" class="float-btn insta">
+    📸 Instagram
+  </a>
+  <a href="#" class="float-btn rez" onclick="openModal(); return false;">
+    ✦ Rezerviši
+  </a>
+</div>
+
+<script>
+  // NAV SCROLL
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // HAMBURGER
+  function toggleNav() {
+    document.getElementById('navLinks').classList.toggle('open');
+  }
+
+  // MENU TABS
+  function switchTab(tab, btn) {
+    document.querySelectorAll('.menu-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('panel-' + tab).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  // MODAL
+  function openModal() {
+    document.getElementById('rezModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+    showOptions();
+  }
+  function closeModal() {
+    document.getElementById('rezModal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function handleOverlayClick(e) {
+    if (e.target === document.getElementById('rezModal')) closeModal();
+  }
+  function showForm() {
+    document.getElementById('modalContent').style.display = 'none';
+    document.getElementById('modalForm').style.display = 'block';
+    document.getElementById('successMsg').classList.remove('show');
+  }
+  function showOptions() {
+    document.getElementById('modalContent').style.display = 'block';
+    document.getElementById('modalForm').style.display = 'none';
+    document.getElementById('successMsg').classList.remove('show');
+  }
+  function submitModalForm(e) {
+    e.preventDefault();
+    document.getElementById('modalContent').style.display = 'none';
+    document.getElementById('modalForm').style.display = 'none';
+    document.getElementById('successMsg').classList.add('show');
+    setTimeout(() => closeModal(), 4000);
+  }
+
+  // SECTION FORM
+  function submitForm(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('.form-submit');
+    btn.textContent = '✓ Zahtjev poslan!';
+    btn.style.background = 'var(--green)';
+    btn.style.color = 'white';
+    setTimeout(() => {
+      btn.textContent = 'Pošalji rezervaciju';
+      btn.style.background = '';
+      btn.style.color = '';
+      e.target.reset();
+    }, 4000);
+  }
+
+  // ESCAPE KEY
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeModal();
+  });
+
+  // SCROLL ANIMATION
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.menu-item, .review-card, .gallery-item, .about-features .feature').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(el);
+  });
+
+  // SET MIN DATE
+  const dateInputs = document.querySelectorAll('input[type="date"]');
+  const today = new Date().toISOString().split('T')[0];
+  dateInputs.forEach(input => input.min = today);
+</script>
+
+</body>
+</html>
